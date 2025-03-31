@@ -1,4 +1,3 @@
-import imageee from "../assets/react.svg";
 import { useFavoritesContext } from "../contexts/FavoritesContext";
 
 const MovieCard = ({ movie }: any) => {
@@ -16,9 +15,13 @@ const MovieCard = ({ movie }: any) => {
 
   return (
     <div className="border-2 hover:shadow-lg text-grey-500 bg-[#38BDF8] hover:bg-[#9333EA] hover:scale-105">
-      <div id="movie-poster" className="flex justify-between">
-        <img src={imageee} alt={movie.title}></img>
+      <div id="movie-poster" className="flex justify-between relative">
+        <img
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie.title}
+        ></img>
         <button
+          className="absolute m-2 text-xl from-neutral-600"
           onClick={(e) => {
             toggleFavorite(e);
           }}
@@ -28,8 +31,7 @@ const MovieCard = ({ movie }: any) => {
       </div>
       <div id="movie-info">
         <h5>{movie.title}</h5>
-        <p>{movie.year}</p>
-        <p>{movie.genre}</p>
+        <p>{movie.release_date.split("-")[0]}</p>
       </div>
     </div>
   );

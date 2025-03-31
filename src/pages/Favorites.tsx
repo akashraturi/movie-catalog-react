@@ -7,7 +7,7 @@ const Favorites = () => {
   return favorites.length == 0 ? (
     <h2>No favorite items here</h2>
   ) : (
-    <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-6 max-h-full">
       {favorites.map((movie: any) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}

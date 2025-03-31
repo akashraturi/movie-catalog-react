@@ -7,8 +7,8 @@ const NavBar = () => {
         <Link to={"/"}>Movie App</Link>
       </div>
       <div className="flex justify-between gap-8">
-      <Link to={"/"}>Home</Link>
-      <Link to={"/favorites"}>Favorites</Link>
+        <Link to={"/"}>Home</Link>
+        <Link to={"/favorites"}>Favorites</Link>
       </div>
     </nav>
   );

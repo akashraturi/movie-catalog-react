@@ -18,21 +18,21 @@ export const FavoritesProvider = ({ children }: any) => {
   }, []);
 
   const setLocalStorage = (favs: any) => {
-      window.localStorage.setItem("favorites", JSON.stringify(favs));
-      console.log(favs);
-    }
+    window.localStorage.setItem("favorites", JSON.stringify(favs));
+    console.log(favs);
+  };
 
   const addToFavorites = (movie: any) => {
     const newFavs = [...favorites, movie];
     setFavorites(newFavs);
     setLocalStorage(newFavs);
-  }
+  };
 
   const removeFromFavorites = (movieId: any) => {
     const newFavs = favorites.filter((movie: any) => movie.id !== movieId);
     setFavorites(newFavs);
     setLocalStorage(newFavs);
-  }
+  };
 
   const isFavorite = (movieId: any) => {
     return favorites.some((movie: any) => movie.id === movieId);
