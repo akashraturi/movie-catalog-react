@@ -8,7 +8,7 @@ function App() {
   return (
     <FavoritesProvider>
       <NavBar />
-      <div className="bg-[#0F172A]">
+      <div className="bg-[#0F172A] max-h-full">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />

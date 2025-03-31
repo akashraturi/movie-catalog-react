@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
-import { fetchPopularMovies } from "../services/api";
+import { fetchPopularMovies, searchMovie } from "../services/api";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -21,14 +21,26 @@ const Home = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const searchMovie = (e: any) => {
+  const searchMovieByQuery = (e: any) => {
     e.preventDefault();
+    const searchAMovie = async () => {
+      try {
+        const movieList = await searchMovie(searchQuery);
+        console.log(movieList);
+        setMovies(movieList);
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    };
+
+    searchAMovie();
     console.log(searchQuery);
   };
 
   return (
     <main className="max-h-full">
-      <form onSubmit={searchMovie} className="p-4">
+      <form onSubmit={searchMovieByQuery} className="p-4">
         <input
           placeholder="Search a movie"
           className="border-1 bg-[#38BDF8]"
