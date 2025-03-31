@@ -4,33 +4,43 @@ import { fetchPopularMovies, searchMovie } from "../services/api";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const loadMovies = async () => {
       try {
+        setLoading(true);
         const movieList = await fetchPopularMovies();
-        setMovies(movieList);
+        if(movieList) setMovies(movieList);
+        else setError("Failed to load movies..");
       } catch (error) {
+        setError("Failed to load movies..");
         console.log(error);
       } finally {
+        setLoading(false);
       }
     };
 
+    console.log(error);
+
     loadMovies();
   }, []);
-
-  const [searchQuery, setSearchQuery] = useState("");
 
   const searchMovieByQuery = (e: any) => {
     e.preventDefault();
     const searchAMovie = async () => {
       try {
+        setLoading(true);
         const movieList = await searchMovie(searchQuery);
-        console.log(movieList);
-        setMovies(movieList);
+        if(movieList) setMovies(movieList);
+        else setError("Failed to load movies..");
       } catch (error) {
+        setError("Failed to fetch results for selected query");
         console.log(error);
       } finally {
+        setLoading(false);
       }
     };
 
@@ -38,7 +48,11 @@ const Home = () => {
     console.log(searchQuery);
   };
 
-  return (
+  return loading ? (
+    <h2 className="text-xl text-white p-4">Loading...</h2>
+  ) : error ? (
+    <h2 className="text-xl text-white p-4">{error}</h2>
+  ) : (
     <main className="max-h-full">
       <form onSubmit={searchMovieByQuery} className="p-4">
         <input
